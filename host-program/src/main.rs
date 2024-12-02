@@ -59,7 +59,7 @@ fn display_command_line_prompt(plugin_state: &PluginState) -> Result<()> {
         // SAFETY: safety of this call depends on the implementation. If we
         // don't control who writes this code and have no way of making sure it
         // is safe, than we cannot guarantee that this call is safe.
-        unsafe { function() };
+        function();
     } else {
         print!("> ");
         std::io::stdout().flush()?;
@@ -160,12 +160,12 @@ fn do_command_load_plugin(args: &[&str], plugin_state: &mut PluginState) -> Resu
     plugin_state.custom_prompt_function = Some(fn_ptr);
 
     // SAFETY: assumming the plugin defines the symbol with the correct signature
-    let register_commands: plugin_sdk::RegisterCommandsFn = unsafe {
-        load_symbol(module, c"ffi_register_commands")?
+    let register_commands: plugin_sdk::PluginOnLoadFn = unsafe {
+        load_symbol(module, c"ffi_plugin_on_load")?
     };
 
     let context = plugin_state as *mut _ as *mut ();
-    unsafe { (register_commands)(context) }
+    (register_commands)(context);
 
     Ok(())
 }

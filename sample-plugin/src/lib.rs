@@ -11,7 +11,7 @@ pub extern "C" fn ffi_custom_prompt() {
     unsafe { COUNTER += 1 };
 }
 
-const CHECK1: plugin_sdk::CustomPromptFn = ffi_custom_prompt;
+const _CHECK1: plugin_sdk::CustomPromptFn = ffi_custom_prompt;
 
 #[no_mangle]
 pub extern "C" fn ffi_plugin_on_load(context: *mut ()) {
@@ -32,4 +32,4 @@ pub extern "C" fn ffi_plugin_on_load(context: *mut ()) {
     unsafe { plugin_sdk::ffi_register_command(context, handler) };
 }
 
-const CHECK2: plugin_sdk::PluginOnLoadFn = ffi_plugin_on_load;
+const _CHECK2: plugin_sdk::PluginOnLoadFn = ffi_plugin_on_load;
