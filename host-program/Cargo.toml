@@ -1,0 +1,11 @@
+[package]
+name = "host-program"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+libc = "0.2.165"
+plugin-sdk.path = "../plugin-sdk"
+
+[build]
+rustflags = ["-C", "link-args=-rdynamic"]
