@@ -21,4 +21,5 @@ rlwrap cargo run -p host-program
 Run interact with the console...
 ```
 > help
+> load-plugin ./target/debug/libsample_plugin.so
 ```
